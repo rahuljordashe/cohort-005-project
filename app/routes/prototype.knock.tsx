@@ -73,7 +73,10 @@ export async function action({ request }: Route.ActionArgs) {
     if (intent === "opt-in" || intent === "opt-out") {
       const res = await knock.users.setPreferences(String(userId), "default", {
         __persistence_strategy__: "merge",
-        workflows: { "new-enrollment": intent === "opt-in" },
+        // Category × channel: the "enrollments" category on the in-app feed channel type.
+        categories: {
+          enrollments: { channel_types: { in_app_feed: intent === "opt-in" } },
+        },
       });
       return { intent, result: res };
     }
@@ -286,8 +289,8 @@ export default function KnockPrototype({ loaderData }: Route.ComponentProps) {
         </p>
         <fetcher.Form method="post" className="flex flex-wrap gap-2">
           <button name="intent" value="clear-prefs" className="rounded border px-2 py-1">Clear my preferences</button>
-          <button name="intent" value="opt-in" className="rounded border px-2 py-1">Opt in to new-enrollment</button>
-          <button name="intent" value="opt-out" className="rounded border px-2 py-1">Opt out of new-enrollment</button>
+          <button name="intent" value="opt-in" className="rounded border px-2 py-1">Opt in to Enrollments (in-app)</button>
+          <button name="intent" value="opt-out" className="rounded border px-2 py-1">Opt out of Enrollments (in-app)</button>
           <button name="intent" value="trigger-enrollment" className="rounded bg-black px-3 py-1 text-white">
             Trigger new-enrollment
           </button>
