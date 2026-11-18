@@ -12,6 +12,9 @@
       "channel_key": "in-app"
     }
   ],
+  "categories": [
+    "enrollments"
+  ],
   "trigger_frequency": "every_trigger",
   "__readonly": {
     "key": "new-enrollment",

@@ -12,6 +12,9 @@
       "channel_key": "in-app"
     }
   ],
+  "categories": [
+    "discussions"
+  ],
   "trigger_frequency": "every_trigger",
   "__readonly": {
     "key": "discussion-reply",
